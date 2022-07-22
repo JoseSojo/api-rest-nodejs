@@ -7,15 +7,16 @@ router.get('/', function(req,res){
 });
 
 // obtener note
-router.get('/note', function(req,res){
-  const notes = Note.find().lean();
+router.get('/note', async function(req,res){
+  const notes = await Note.find().lean();
+  console.log(notes)
   res.render('note/note.hbs', {notes});
 });
 
 // create note
 router.post('/note/create', async function(req,res){
-  const {note_title, note_description} = req.body;
-  const NewNote = await new Note({vnote_title, note_description});
+  const { title, description } = req.body;
+  const NewNote = await new Note({title, description});
   await NewNote.save();
   res.redirect('/note');
 });

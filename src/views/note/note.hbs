@@ -1,17 +1,18 @@
 
-<div class="container">
+<div class="container-fluid mt-3">
   <div class="row">
-    <div class="col-md-5">
+    <div class="col-md-4">
       <div class="card">
-        <form class="card-body" action="" method="post">
-          <input type="text" name="note_title" class="my-2 form-control">
-          <textarea name="note_description" class="my-2 form-control"></textarea>
+        <form class="card-body" action="/note/create" method="POST">
+          <input type="text" name="title" class="my-2 form-control" placeholder="Titulo">
+          <textarea name="description" class="my-2 form-control" placeholder="Descripcion"></textarea>
           <input type="submit" value="Guardar nota">
         </form>
       </div>
     </div>
-    <div class="col-md-7">
-      <table>
+    {{#if notes}}
+    <div class="col-md-8">
+      <table class='table table-striped table-light'>
         <thead>
           <tr>
             <td colspan="2">Titulo</td>
@@ -24,13 +25,12 @@
               <td colspan="2">{{note_title}}</td>
               <td colspan="8">{{note_description}}</td>
             </tr>
-          {{else}}
-            <tr>
-              <td colspan="10">No tienes notas</td>
-            </tr>
           {{/each}}
         </tbody>
       </table>
+      {{else}}
+        <p class="lead">No tienes notas</p>
+      {{/if}}
     </div>
   </div>
 </div>
