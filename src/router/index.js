@@ -8,8 +8,7 @@ router.get('/', function(req,res){
 
 // obtener note
 router.get('/note', async function(req,res){
-  const notes = await Note.find().lean();
-  console.log(notes)
+  const notes = await Note.find();
   res.render('note/note.hbs', {notes});
 });
 

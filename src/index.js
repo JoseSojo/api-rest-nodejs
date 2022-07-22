@@ -28,6 +28,8 @@ app.use(morgan('dev'));
 app.use(express.urlencoded({extended: false}));
 app.use(methodOverride('_method'));
 
+// static files
+app.use(express.static(path.join(__dirname, 'assets')));
 
 // routers
 app.use(require(path.join(__dirname, '/router')));
