@@ -2,7 +2,7 @@ const express = require('express');
 const exphbs = require('express-handlebars');
 const methodOverride = require('method-override');
 const session = require('express-session');
-const morgan = require('morgan');
+//const morgan = require('morgan');
 const { ConnectMongo } = require('./config/database.js');
 
 const path = require('path');
@@ -24,7 +24,7 @@ app.engine('.hbs', exphbs.engine({
 app.set('view engine', 'hbs');
 
 // Middlewares
-app.use(morgan('dev'));
+//app.use(morgan('dev'));
 app.use(express.urlencoded({extended: false}));
 app.use(methodOverride('_method'));
 
