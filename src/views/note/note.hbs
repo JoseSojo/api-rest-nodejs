@@ -1,0 +1,36 @@
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-5">
+      <div class="card">
+        <form class="card-body" action="" method="post">
+          <input type="text" name="note_title" class="my-2 form-control">
+          <textarea name="note_description" class="my-2 form-control"></textarea>
+          <input type="submit" value="Guardar nota">
+        </form>
+      </div>
+    </div>
+    <div class="col-md-7">
+      <table>
+        <thead>
+          <tr>
+            <td colspan="2">Titulo</td>
+            <td colspan="8">Descripcion</td>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each notes}}
+            <tr>
+              <td colspan="2">{{note_title}}</td>
+              <td colspan="8">{{note_description}}</td>
+            </tr>
+          {{else}}
+            <tr>
+              <td colspan="10">No tienes notas</td>
+            </tr>
+          {{/each}}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
