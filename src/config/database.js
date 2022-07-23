@@ -6,7 +6,7 @@ const remote = 'mongodb+srv://demon258:j28*Sojo@cluster0.haig3y0.mongodb.net/nod
 
 async function ConnectMongo(){
   try {
-    await mongoose.connect(remote);
+    await mongoose.connect(local);
     console.log('Database connected');
   } catch (e) {
     console.log(e)
