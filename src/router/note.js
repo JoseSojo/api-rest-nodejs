@@ -8,14 +8,14 @@ router.get('/', function(req,res){
 
 // obtener note
 router.get('/note', async function(req,res){
-  const notes = await Note.find().lean();
+  const notes = await Note.find({create_by: req.user.id}).lean();
   res.render('note/note.hbs', {notes});
 });
 
 // get update
 router.get('/note/update/:id', async function(req,res){
   const update = await Note.findById(req.params.id).lean();
-  const notes = await Note.find().lean();
+  const notes = await Note.find({create_by: req.user.id}).lean();
   res.render('note/note.hbs', {notes, update});
 });
 
@@ -28,6 +28,7 @@ router.get('/note/delete/:id', async function(req,res){
 router.post('/note/create', async function(req,res){
   const { title, description } = req.body;
   const NewNote = await new Note({title, description});
+  NewNote.create_by = req.user.id
   await NewNote.save();
   res.redirect('/note');
 });
