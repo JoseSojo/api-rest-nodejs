@@ -8,8 +8,20 @@ router.get('/', function(req,res){
 
 // obtener note
 router.get('/note', async function(req,res){
-  const notes = await Note.find();
+  const notes = await Note.find().lean();
   res.render('note/note.hbs', {notes});
+});
+
+// get update
+router.get('/note/update/:id', async function(req,res){
+  const update = await Note.findById(req.params.id).lean();
+  const notes = await Note.find().lean();
+  res.render('note/note.hbs', {notes, update});
+});
+
+router.get('/note/delete/:id', async function(req,res){
+  const update = await Note.findByIdAndDelete(req.params.id);
+  res.redirect('/note');
 });
 
 // create note
@@ -21,9 +33,13 @@ router.post('/note/create', async function(req,res){
 });
 
 // update note
-router.get('/note/update/:id', function(req,res){
-  const update = Note.findById(id).lean();
-  res.redirect('/note', {update});
+router.post('/note/update/:id', async function(req, res){
+  console.log(req.params.id);
+  console.log(req.body);
+  const {title,description} = req.body
+  const Update = {title,description};
+  await Note.findByIdAndUpdate(req.params.id, Update);
+  res.redirect('/note');
 });
 
 module.exports = router;

@@ -3,11 +3,21 @@
   <div class="row">
     <div class="col-md-4">
       <div class="card">
-        <form class="card-body" action="/note/create" method="POST">
-          <input type="text" name="title" class="my-2 form-control" placeholder="Titulo">
-          <textarea name="description" class="my-2 form-control" placeholder="Descripcion"></textarea>
-          <input type="submit" value="Guardar nota">
-        </form>
+        {{#if update}}
+          <h4>Actualizar Nota</h4>
+          <form class="card-body" action="/note/update/{{update._id}}" method="POST">
+            <input type="text" name="title" value='{{update.title}}' class="my-2 form-control" placeholder="Titulo">
+            <textarea name="description" class="my-2 form-control" placeholder="Descripcion">{{update.description}}</textarea>
+            <input type="submit" value="Actualizar Nota">
+          </form>
+        {{else}}
+          <h4>Crear Nota</h4>
+          <form class="card-body" action="/note/create" method="POST">
+            <input type="text" name="title" class="my-2 form-control" placeholder="Titulo">
+            <textarea name="description" class="my-2 form-control" placeholder="Descripcion"></textarea>
+            <input type="submit" value="Guardar Nota">
+          </form>
+        {{/if}}
       </div>
     </div>
     {{#if notes}}
@@ -15,21 +25,28 @@
       <table class='table table-striped table-light'>
         <thead>
           <tr>
-            <td colspan="2">Titulo</td>
-            <td colspan="8">Descripcion</td>
+            <td colspan="1">Titulo</td>
+            <td colspan="5">Descripcion</td>
+            <td colspan="3">Opciones</td>
           </tr>
         </thead>
         <tbody>
           {{#each notes}}
             <tr>
-              <td colspan="2">{{note_title}}</td>
-              <td colspan="8">{{note_description}}</td>
+              <td colspan="1">{{title}}</td>
+              <td colspan="5">{{description}}</td>
+              <td>
+                <a href="/note/update/{{_id}}" class='col-md-3 fas fa-pencil'></a>
+                <a href="/note/delete/{{_id}}" class='col-md-3 fas fa-trash text-danger'></a>
+              </td>
             </tr>
           {{/each}}
         </tbody>
       </table>
       {{else}}
-        <p class="lead">No tienes notas</p>
+        <div class="col-md-8">
+          <p class="lead text-center">No tienes notas</p>
+        </div>
       {{/if}}
     </div>
   </div>
