@@ -2,16 +2,26 @@ const express = require('express');
 const router = express.Router();
 const User = require('../models/user_schema.js');
 const passport = require('passport');
+const {ON, OFF} = require('../config/help.js');
 
-router.get('/login', function(req,res){
+router.get('/', OFF, function(req,res){
+  res.redirect('/login');
+});
+
+router.get('/logout', OFF, function(req,res){
+  req.logout();
+  res.redirect('/login');
+});
+
+router.get('/login', OFF, function(req,res){
   res.render('user/login.hbs');
 });
 
-router.get('/register', function(req,res){
+router.get('/register', OFF, function(req,res){
   res.render('user/register.hbs');
 });
 
-router.post('/login', function(req,res,next){
+router.post('/login', OFF, function(req,res,next){
   passport.authenticate('local.login', {
     successRedirect: '/note',
     failureRedirect: '/login',
@@ -21,7 +31,7 @@ router.post('/login', function(req,res,next){
 
 
 //
-router.post('/register', async function(req, res){
+router.post('/register', OFF, async function(req, res){
   console.log(req.body);
   const {username,email,password,confirm_password} = req.body;
   const user = await User.findOne({username});
