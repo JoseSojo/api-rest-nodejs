@@ -8,14 +8,14 @@
           <form class="card-body" action="/note/update/{{update._id}}" method="POST">
             <input type="text" name="title" value='{{update.title}}' class="my-2 form-control" placeholder="Titulo">
             <textarea name="description" class="my-2 form-control" placeholder="Descripcion">{{update.description}}</textarea>
-            <input type="submit" value="Actualizar Nota">
+            <input type="submit" class="btn btn-primary" value="Actualizar Nota">
           </form>
         {{else}}
           <h4>Crear Nota</h4>
           <form class="card-body" action="/note/create" method="POST">
             <input type="text" name="title" class="my-2 form-control" placeholder="Titulo">
             <textarea name="description" class="my-2 form-control" placeholder="Descripcion"></textarea>
-            <input type="submit" value="Guardar Nota">
+            <input type="submit" class="btn btn-primary" value="Guardar Nota">
           </form>
         {{/if}}
       </div>
