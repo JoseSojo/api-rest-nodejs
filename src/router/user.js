@@ -4,8 +4,8 @@ const User = require('../models/user_schema.js');
 const passport = require('passport');
 const {ON, OFF} = require('../config/help.js');
 
-router.get('/', OFF, function(req,res){
-  res.redirect('/login');
+router.get('/', ON, function(req,res){
+  res.render('index.hbs');
 });
 
 router.get('/logout', OFF, function(req,res){

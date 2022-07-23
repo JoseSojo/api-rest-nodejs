@@ -3,10 +3,6 @@ const router = express.Router();
 const Note = require('../models/note_schema.js');
 const {ON, OFF} = require('../config/help.js');
 
-router.get('/', ON, function(req,res){
-  res.render('index.hbs');
-});
-
 // obtener note
 router.get('/note', ON, async function(req,res){
   const notes = await Note.find({create_by: req.user.id}).lean();
